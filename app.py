@@ -285,7 +285,6 @@ if oner_buton or yenile_buton:
 if st.session_state["secilen_kombin_id"] is None:
     if oner_buton or yenile_buton:
         st.warning("Bu tarz ve mevsim için uygun kombin bulunamadı.")
-    else:
         st.info("Soldan tarz ve mevsim seçip kombin öner butonuna bas.")
 else:
     secilen_id = st.session_state["secilen_kombin_id"]
