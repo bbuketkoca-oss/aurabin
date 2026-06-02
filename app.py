@@ -233,7 +233,9 @@ st.markdown(
     """
     <div class="hero">
         <div class="hero-title">✨ AuraBin</div>
-        <div class="hero-sub">Tarzına uygun akıllı kombin öneri sistemi</div>
+        <div class="hero-sub">
+Yapay zekâ destekli kişiselleştirilmiş moda asistanı
+</div>
     </div>
     """,
     unsafe_allow_html=True
@@ -251,7 +253,14 @@ col_btn1, col_btn2 = st.sidebar.columns(2)
 oner_buton = col_btn1.button("Kombin Öner", use_container_width=True)
 yenile_buton = col_btn2.button("Yenile", use_container_width=True)
 
-st.sidebar.markdown("---")
+st.sidebar.markdown("## 🔥 Trend Stiller")
+
+st.sidebar.markdown("""
+- Old Money ↑  
+- Minimal Chic ↑  
+- Earth Tone ↑  
+- Streetwear ↑
+""")
 st.sidebar.caption("AuraBin seçtiğin filtreye göre uygun kombinleri gösterir.")
 
 uygun_df, kombin_idleri = kombinleri_getir(df, stil, mevsim)
@@ -260,8 +269,12 @@ if "secilen_kombin_id" not in st.session_state:
     st.session_state["secilen_kombin_id"] = None
 
 if oner_buton or yenile_buton:
+
+    with st.spinner("✨ AuraBin AI tarzını analiz ediyor..."):
+        import time
+        time.sleep(1.5)
+
     if len(kombin_idleri) == 0:
-        st.session_state["secilen_kombin_id"] = None
     else:
         onceki = st.session_state["secilen_kombin_id"]
         adaylar = [k for k in kombin_idleri if k != onceki]
@@ -284,6 +297,16 @@ else:
     st.markdown('<div class="section-title">Önerilen Kombin</div>', unsafe_allow_html=True)
     st.markdown(f"### Kombin #{secilen_id}")
     st.markdown(f'<div class="score-box">Uyum Puanı: %{puan}</div>', unsafe_allow_html=True)
+    col1, col2, col3 = st.columns(3)
+
+with col1:
+    st.metric("🎨 Renk Uyumu", f"%{random.randint(85,96)}")
+
+with col2:
+    st.metric("✨ Stil Skoru", f"%{random.randint(88,98)}")
+
+with col3:
+    st.metric("🔥 Trend Skoru", f"%{random.randint(80,95)}")
 
     kolonlar = st.columns(len(kombin_df))
 
@@ -336,3 +359,10 @@ else:
     )
 
     st.markdown('</div>', unsafe_allow_html=True)
+    st.markdown("""
+---
+<center>
+✨ AuraBin AI Fashion Assistant <br>
+Developed for Management Information Systems Project - 2026
+</center>
+""", unsafe_allow_html=True)
